@@ -89,7 +89,6 @@ int16_t ADS1X15::getMV() {
 					break;
 				case differentialChannels::channels_2_3:
 					raw_value = ads_16.readADC_Differential_2_3();
-					ads_12.computeVolts(raw_value);
 					break;			
 			}
 			// Convert to voltage
@@ -126,7 +125,6 @@ int16_t ADS1X15::getMV() {
 					break;
 				case differentialChannels::channels_2_3:
 					raw_value = ads_12.readADC_Differential_2_3();
-					ads_12.computeVolts(raw_value);
 					break;			
 			}
 			// Convert to voltage
