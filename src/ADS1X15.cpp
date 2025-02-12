@@ -19,11 +19,11 @@ ADS1X15::ADS1X15(String Name, String Parameter, int Channel, ADCType ADC_Type, i
 }
 
 bool ADS1X15::begin() {
-    values.resize(1);
     Description.parameterQuantity = 1;
     Description.type = "ADC Sensor";
     Description.units = {"mV"};
     Description.version = 1.0;
+	values.resize(Description.parameterQuantity);
 
     // Use the begin() method with the I2C address
 	if (adc_type == ADS1115) {
