@@ -98,6 +98,7 @@ int16_t ADS1X15::getMV() {
 					break;
 				GAIN_ONE:
 					mv_value = raw_value * 0.125;
+					break;
 				GAIN_TWO:
 					mv_value = raw_value * 0.0625;
 					break;
@@ -134,6 +135,7 @@ int16_t ADS1X15::getMV() {
 					break;
 				GAIN_ONE:
 					mv_value = raw_value * 2;
+					break;
 				GAIN_TWO:
 					mv_value = raw_value * 1;
 					break;
