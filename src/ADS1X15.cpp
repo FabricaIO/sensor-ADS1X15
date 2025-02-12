@@ -36,7 +36,14 @@ bool ADS1X15::begin() {
 }
 
 bool ADS1X15::takeMeasurement() {
-    int16_t raw_value;
+	values[0] = getMV();
+    return true;
+}
+
+/// @brief Gets the mV reading from the device
+/// @return the reading in mV
+int16_t ADS1X15::getMV() {
+	int16_t raw_value;
 	if (adc_type == ADS1115) {
 		raw_value = ads_16.readADC_SingleEnded(channel);
 	} else {
@@ -66,6 +73,5 @@ bool ADS1X15::takeMeasurement() {
 			mv_value = raw_value * 0.0078125;
 			break;
 	}
-	values[0] = mv_value;
-    return true;
+	return mv_value;
 }

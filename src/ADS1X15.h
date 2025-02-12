@@ -42,4 +42,6 @@ class ADS1X15 : public Sensor {
 
         /// @brief The I2C bus
         TwoWire* i2cbus;
+
+		int16_t getMV();
 };
