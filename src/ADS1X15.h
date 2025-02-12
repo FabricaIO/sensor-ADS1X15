@@ -21,7 +21,7 @@ class ADS1X15 : public Sensor {
         bool begin();
         bool takeMeasurement();
 
-    private:
+    protected:
         /// @brief The ADS1115 object
         Adafruit_ADS1115 ads_16;
 
