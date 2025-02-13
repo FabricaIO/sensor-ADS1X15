@@ -26,7 +26,7 @@ ADS1X15::ADS1X15(String Name, String Parameter, int Channel, ADCType ADC_Type, i
 /// @param Address The I2C address of the ADC
 /// @param I2CBus The I2C bus attached to the ADC
 /// @param Gain The gain of the ADC
-ADS1X15::ADS1X15(String Name, String Parameter, differentialChannels Channels, ADCType ADC_Type, int Address, TwoWire* I2CBus, adsGain_t Gain) {
+ADS1X15::ADS1X15(String Name, String Parameter, DifferentialChannels Channels, ADCType ADC_Type, int Address, TwoWire* I2CBus, adsGain_t Gain) {
 	adc_type = ADC_Type;
 	address = Address;
 	i2cbus = I2CBus;
@@ -76,32 +76,32 @@ int16_t ADS1X15::getMV() {
 	} else {
 		if (adc_type == ADS1115) {
 			switch (channels) {
-				case differentialChannels::channels_0_1:
+				case DifferentialChannels::channels_0_1:
 					raw_value = ads_16.readADC_Differential_0_1();
 					break;
-				case differentialChannels::channels_0_3:
+				case DifferentialChannels::channels_0_3:
 					raw_value = ads_16.readADC_Differential_0_3();
 					break;
-				case differentialChannels::channels_1_3:
+				case DifferentialChannels::channels_1_3:
 					raw_value = ads_16.readADC_Differential_1_3();
 					break;
-				case differentialChannels::channels_2_3:
+				case DifferentialChannels::channels_2_3:
 					raw_value = ads_16.readADC_Differential_2_3();
 					break;
 			}
 			return ads_16.computeVolts(raw_value);
 		} else {
 			switch (channels) {
-				case differentialChannels::channels_0_1:
+				case DifferentialChannels::channels_0_1:
 					raw_value = ads_12.readADC_Differential_0_1();
 					break;
-				case differentialChannels::channels_0_3:
+				case DifferentialChannels::channels_0_3:
 					raw_value = ads_12.readADC_Differential_0_3();
 					break;
-				case differentialChannels::channels_1_3:
+				case DifferentialChannels::channels_1_3:
 					raw_value = ads_12.readADC_Differential_1_3();
 					break;
-				case differentialChannels::channels_2_3:
+				case DifferentialChannels::channels_2_3:
 					raw_value = ads_12.readADC_Differential_2_3();
 					break;
 			}

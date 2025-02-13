@@ -17,9 +17,9 @@
 class ADS1X15 : public Sensor {
     public:
 		enum ADCType {ADS1115, ADS1015};
-		enum differentialChannels {channels_0_1, channels_0_3, channels_1_3, channels_2_3};
+		enum DifferentialChannels {channels_0_1, channels_0_3, channels_1_3, channels_2_3};
         ADS1X15(String Name, String Parameter, int Channel, ADCType ADC_Type, int Address = 0x49, TwoWire* I2CBus = &Wire, adsGain_t Gain  = GAIN_TWOTHIRDS);
-		ADS1X15(String Name, String Parameter, differentialChannels Channels, ADCType ADC_Type, int Address = 0x49, TwoWire* I2CBus = &Wire, adsGain_t Gain  = GAIN_TWOTHIRDS);
+		ADS1X15(String Name, String Parameter, DifferentialChannels Channels, ADCType ADC_Type, int Address = 0x49, TwoWire* I2CBus = &Wire, adsGain_t Gain  = GAIN_TWOTHIRDS);
         bool begin();
         bool takeMeasurement();
 
@@ -43,7 +43,7 @@ class ADS1X15 : public Sensor {
 		int channel;
 
 		/// @brief The differential channels to use on the ADC
-		differentialChannels channels;
+		DifferentialChannels channels;
 
         /// @brief The I2C bus
         TwoWire* i2cbus;
