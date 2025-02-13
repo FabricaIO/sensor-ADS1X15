@@ -10,8 +10,8 @@
 /// @param Gain The gain of the ADC
 ADS1X15::ADS1X15(String Name, String Parameter, int Channel, ADCType ADC_Type, int Address, TwoWire* I2CBus, adsGain_t Gain) {
 	adc_type = ADC_Type;
-    address = Address;
-    i2cbus = I2CBus;
+	address = Address;
+	i2cbus = I2CBus;
 	channel = Channel;
 	gain = Gain;
 	Description.parameters = {Parameter};
@@ -28,8 +28,8 @@ ADS1X15::ADS1X15(String Name, String Parameter, int Channel, ADCType ADC_Type, i
 /// @param Gain The gain of the ADC
 ADS1X15::ADS1X15(String Name, String Parameter, differentialChannels Channels, ADCType ADC_Type, int Address, TwoWire* I2CBus, adsGain_t Gain) {
 	adc_type = ADC_Type;
-    address = Address;
-    i2cbus = I2CBus;
+	address = Address;
+	i2cbus = I2CBus;
 	channels = Channels;
 	channel = -1;
 	gain = Gain;
@@ -38,16 +38,16 @@ ADS1X15::ADS1X15(String Name, String Parameter, differentialChannels Channels, A
 }
 
 bool ADS1X15::begin() {
-    Description.parameterQuantity = 1;
-    Description.type = "ADC Sensor";
-    Description.units = {"mV"};
-    Description.version = 1.0;
+	Description.parameterQuantity = 1;
+	Description.type = "ADC Sensor";
+	Description.units = {"mV"};
+	Description.version = 1.0;
 	values.resize(Description.parameterQuantity);
 
-    // Use the begin() method with the I2C address
+	// Use the begin() method with the I2C address
 	if (adc_type == ADS1115) {
 		ads_16.setGain(gain);
-    	return ads_16.begin(address, i2cbus);
+		return ads_16.begin(address, i2cbus);
 	} else {
 		ads_12.setGain(gain);
 		return ads_12.begin(address, i2cbus);
@@ -60,12 +60,13 @@ bool ADS1X15::takeMeasurement() {
 		return false;
 	}
 	values[0] = mv;
-    return true;
+	return true;
 }
 
-/// @brief Gets the mV reading from the device
-/// @return The reading in mV
+/// @brief Gets the mV reading from the ADC
+/// @return The mV measured (could be negative if differential)
 int16_t ADS1X15::getMV() {
+	int16_t raw_value;
 	if (channel != -1) {
 		if (adc_type == ADS1115) {
 			return ads_16.computeVolts(ads_16.readADC_SingleEnded(channel));
@@ -73,11 +74,8 @@ int16_t ADS1X15::getMV() {
 			return ads_12.computeVolts(ads_12.readADC_SingleEnded(channel));
 		}
 	} else {
-		int16_t raw_value;
-		int16_t mv_value;
 		if (adc_type == ADS1115) {
-			switch (channels)
-			{
+			switch (channels) {
 				case differentialChannels::channels_0_1:
 					raw_value = ads_16.readADC_Differential_0_1();
 					break;
@@ -89,32 +87,11 @@ int16_t ADS1X15::getMV() {
 					break;
 				case differentialChannels::channels_2_3:
 					raw_value = ads_16.readADC_Differential_2_3();
-					break;			
-			}
-			// Convert to voltage
-			switch (gain) {
-				GAIN_TWOTHIRDS:
-					mv_value = raw_value * 0.1875;
-					break;
-				GAIN_ONE:
-					mv_value = raw_value * 0.125;
-					break;
-				GAIN_TWO:
-					mv_value = raw_value * 0.0625;
-					break;
-				GAIN_FOUR:
-					mv_value = raw_value * 0.03125;
-					break;
-				GAIN_EIGHT:
-					mv_value = raw_value * 0.015625;
-					break;
-				GAIN_SIXTEEN:
-					mv_value = raw_value * 0.0078125;
 					break;
 			}
+			return ads_16.computeVolts(raw_value);
 		} else {
-			switch (channels)
-			{
+			switch (channels) {
 				case differentialChannels::channels_0_1:
 					raw_value = ads_12.readADC_Differential_0_1();
 					break;
@@ -126,30 +103,9 @@ int16_t ADS1X15::getMV() {
 					break;
 				case differentialChannels::channels_2_3:
 					raw_value = ads_12.readADC_Differential_2_3();
-					break;			
-			}
-			// Convert to voltage
-			switch (gain) {
-				GAIN_TWOTHIRDS:
-					mv_value = raw_value * 3;
-					break;
-				GAIN_ONE:
-					mv_value = raw_value * 2;
-					break;
-				GAIN_TWO:
-					mv_value = raw_value * 1;
-					break;
-				GAIN_FOUR:
-					mv_value = raw_value * 0.5;
-					break;
-				GAIN_EIGHT:
-					mv_value = raw_value * 0.35;
-					break;
-				GAIN_SIXTEEN:
-					mv_value = raw_value * 0.125;
 					break;
 			}
+			return ads_12.computeVolts(raw_value);
 		}
-		return mv_value;
 	}
 }
