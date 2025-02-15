@@ -1,0 +1,125 @@
+{
+	"name": "Fabrica-IO Sensor ADS1X15 ADC",
+	"version": "0.5.0",
+	"description": "I2C ADC with 12 or 16 bit of resolution",
+	"keywords": "Fabrica-IO, sensor, analog, adc, i2c",
+	"repository":
+	{
+	  "type": "git",
+	  "url": "https://github.com/FabricaIO/sensor-ADS1X15.git"
+	},
+	"authors":
+	[
+	  {
+		"name": "Sam Groveman",
+		"email": "SamGroveman@outlook.com",
+		"url": "https://github.com/FabricaIO"
+	  }
+	],
+	"dependencies": {
+		"Adafruit_ADS1X15": "adafruit/Adafruit ADS1X15@^2.5.0"
+	  },
+	"license": "GPLv3",
+	"homepage": "https://github.com/FabricaIO",
+	"frameworks": "arduino",
+	"platforms": "*",
+	"fabrica-io" : {
+		"name": "I2CADC",
+		"type": 0,
+		"category": "analog input",
+		"libname": "ADS1X15",
+		"includes": ["ADS1X15"],
+		"description": "I2C ADC with 12 or 16 bit of resolution",
+		"constructor":
+		[
+			[
+				{
+					"name": "Name",
+					"type": "String",
+					"description": "The name of the analog device",
+					"default": ""
+				},
+				{
+					"name": "Parameter",
+					"type": "String",
+					"description": "The label for the measured value",
+					"default": ""
+				},
+				{
+					"name": "Channel",
+					"type": "int",
+					"description": "The ADC channel to use",
+					"default": ""
+				},
+				{
+					"name": "ADC_Type",
+					"type": "ADCType",
+					"description": "ADC model type",
+					"default": ""
+				},
+				{
+					"name": "Address",
+					"type": "int",
+					"description": "The I2C address",
+					"default": "0x49"
+				},
+				{
+					"name": "I2CBus",
+					"type": "TwoWire*",
+					"description": "The I2C bus",
+					"default": "&Wire"
+				},
+				{
+					"name": "Gain",
+					"type": "adsGain_t",
+					"description": "The ADC gain",
+					"default": "GAIN_TWOTHIRDS"
+				}
+			],
+			[
+				{
+					"name": "Name",
+					"type": "String",
+					"description": "The name of the analog device",
+					"default": ""
+				},
+				{
+					"name": "Parameter",
+					"type": "String",
+					"description": "The label for the measured value",
+					"default": ""
+				},
+				{
+					"name": "Channels",
+					"type": "DifferentialChannels",
+					"description": "The differential ADC channels to use",
+					"default": ""
+				},
+				{
+					"name": "ADC_Type",
+					"type": "ADCType",
+					"description": "ADC model type",
+					"default": ""
+				},
+				{
+					"name": "Address",
+					"type": "int",
+					"description": "The I2C address",
+					"default": "0x49"
+				},
+				{
+					"name": "I2CBus",
+					"type": "TwoWire*",
+					"description": "The I2C bus",
+					"default": "&Wire"
+				},
+				{
+					"name": "Gain",
+					"type": "adsGain_t",
+					"description": "The ADC gain",
+					"default": "GAIN_TWOTHIRDS"
+				}
+			]
+		]
+	}
+  }
