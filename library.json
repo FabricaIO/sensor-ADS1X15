@@ -1,5 +1,5 @@
 {
-	"name": "Fabrica-IO Sensor ADS1X15 ADC",
+	"name": "sensor-ADS1X15",
 	"version": "0.5.0",
 	"description": "I2C ADC with 12 or 16 bit of resolution",
 	"keywords": "Fabrica-IO, sensor, analog, adc, i2c",
