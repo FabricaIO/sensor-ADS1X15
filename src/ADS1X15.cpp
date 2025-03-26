@@ -44,6 +44,11 @@ bool ADS1X15::begin() {
 	Description.version = 1.0;
 	values.resize(Description.parameterQuantity);
 
+	// Call default config
+	if (!Sensor::begin()) {
+		return false;
+	}
+
 	// Use the begin() method with the I2C address
 	if (adc_type == ADS1115) {
 		ads_16.setGain(gain);
