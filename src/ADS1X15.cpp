@@ -8,7 +8,7 @@
 /// @param Address The I2C address of the ADC
 /// @param I2CBus The I2C bus attached to the ADC
 /// @param Gain The gain of the ADC
-ADS1X15::ADS1X15(String Name, String Parameter, int Channel, ADCType ADC_Type, int Address, TwoWire* I2CBus, adsGain_t Gain) {
+ADS1X15::ADS1X15(String Name, String Parameter, int Channel, ADCType ADC_Type, int Address, TwoWire* I2CBus, adsGain_t Gain) : Sensor(Name) {
 	adc_type = ADC_Type;
 	address = Address;
 	i2cbus = I2CBus;
@@ -26,7 +26,7 @@ ADS1X15::ADS1X15(String Name, String Parameter, int Channel, ADCType ADC_Type, i
 /// @param Address The I2C address of the ADC
 /// @param I2CBus The I2C bus attached to the ADC
 /// @param Gain The gain of the ADC
-ADS1X15::ADS1X15(String Name, String Parameter, DifferentialChannels Channels, ADCType ADC_Type, int Address, TwoWire* I2CBus, adsGain_t Gain) {
+ADS1X15::ADS1X15(String Name, String Parameter, DifferentialChannels Channels, ADCType ADC_Type, int Address, TwoWire* I2CBus, adsGain_t Gain) : Sensor(Name) {
 	adc_type = ADC_Type;
 	address = Address;
 	i2cbus = I2CBus;
@@ -34,7 +34,6 @@ ADS1X15::ADS1X15(String Name, String Parameter, DifferentialChannels Channels, A
 	channel = -1;
 	gain = Gain;
 	Description.parameters = {Parameter};
-	Description.name = Name;
 }
 
 bool ADS1X15::begin() {

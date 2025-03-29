@@ -34,12 +34,6 @@
 		[
 			[
 				{
-					"name": "Name",
-					"type": "String",
-					"description": "The name of the analog device",
-					"default": ""
-				},
-				{
 					"name": "Parameter",
 					"type": "String",
 					"description": "The label for the measured value",
