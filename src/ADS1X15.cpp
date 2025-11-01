@@ -36,6 +36,8 @@ ADS1X15::ADS1X15(String Name, String Parameter, DifferentialChannels Channels, A
 	Description.parameters = {Parameter};
 }
 
+/// @brief Starts a ADS device
+/// @return True on success
 bool ADS1X15::begin() {
 	Description.parameterQuantity = 1;
 	Description.type = "ADC Sensor";
@@ -58,6 +60,8 @@ bool ADS1X15::begin() {
 	}
 }
 
+/// @brief Takes a measurement from the ADS
+/// @return True on success
 bool ADS1X15::takeMeasurement() {
 	uint16_t mv = getMV();
 	if (mv == 0) {
