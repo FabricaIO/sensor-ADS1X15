@@ -64,9 +64,6 @@ bool ADS1X15::begin() {
 /// @return True on success
 bool ADS1X15::takeMeasurement() {
 	uint16_t mv = getMV();
-	if (mv == 0) {
-		return false;
-	}
 	values[0] = mv;
 	return true;
 }
