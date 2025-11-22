@@ -14,6 +14,7 @@
 #include <Adafruit_ADS1X15.h>
 #include <Sensor.h>
 
+/// @brief Device for using the ADS1X15 class of ADC chips
 class ADS1X15 : public Sensor {
     public:
 		enum ADCType {ADS1115, ADS1015};
